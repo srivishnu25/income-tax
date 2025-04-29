@@ -17,7 +17,7 @@ function App() {
   const [tax, setTax] = useState<number>(0);
 
   const calculateTax = () => {
-    const incomeNumber = Number(income);
+    const incomeNumber = Number(income.replace(/,/g, ""));
 
     if (!incomeNumber) {
       setMessage("Please enter a valid annual income.");

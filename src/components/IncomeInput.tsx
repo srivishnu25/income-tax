@@ -6,10 +6,14 @@ type IncomeInputProps = {
 
 function IncomeInput({ income, setIncome, calculateTax }: IncomeInputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (/^\d*$/.test(value)) {
-      // allow only numbers
-      setIncome(value);
+    const rawValue = e.target.value.replace(/,/g, ""); // Remove commas first
+
+    if (/^\d*$/.test(rawValue)) {
+      // Only digits
+      const formattedValue = new Intl.NumberFormat("en-IN").format(
+        Number(rawValue)
+      );
+      setIncome(formattedValue);
     }
   };
   return (
